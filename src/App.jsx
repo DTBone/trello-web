@@ -1,7 +1,5 @@
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+
 import { useColorScheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -12,6 +10,7 @@ import Box from "@mui/material/Box";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
+import Container from "@mui/material/Container";
 
 function ModeSelect() {
   const { mode, setMode } = useColorScheme();
@@ -54,36 +53,38 @@ function ModeSelect() {
   );
 }
 
-function ModeToggle() {
-  const { mode, setMode } = useColorScheme();
-  // const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)")
-  // const prefersLightMode = useMediaQuery("(prefers-color-scheme: light)")
-  // console.log("preferencesDarkMode", prefersDarkMode)
-  // console.log("preferencesLightMode", prefersLightMode)
-  return (
-    <Button
-      onClick={() => {
-        setMode(mode === "light" ? "dark" : "light");
-      }}
-    >
-      {mode === "light" ? "Turn dark" : "Turn light"}
-    </Button>
-  );
-}
-
 function App() {
   return (
-    <>
-      <ModeSelect></ModeSelect>
-      <hr />
-      <ModeToggle></ModeToggle>
-      <hr />
-      <div>Thanh Binh Dang</div>
-      <Typography variant="body2" color="text.secondary">
-        Text Typography
-      </Typography>
-      <Button variant="contained">Hello World</Button>
-    </>
+    <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
+      <Box sx={{
+        backgroundColor: 'primary.main',
+        width: '100%',
+        height: (theme) => theme.componentSize.appBarHeight,
+        display: 'flex',
+        alignItems: 'center',
+      }}>
+        <ModeSelect></ModeSelect>
+
+      </Box >
+      <Box sx={{
+        backgroundColor: 'secondary.main',
+        width: '100%',
+        height: (theme) => theme.componentSize.boardBarHeight,
+        display: 'flex',
+        alignItems: 'center',
+      }}>
+        Board bar
+      </Box>
+      <Box sx={{
+        backgroundColor: 'primary.main',
+        width: '100%',
+        height: (theme) => `calc(100vh - ${theme.componentSize.appBarHeight} - ${theme.componentSize.boardBarHeight})`,
+        display: 'flex',
+        alignItems: 'center',
+      }}>
+        Board content
+      </Box>
+    </Container>
   );
 }
 
